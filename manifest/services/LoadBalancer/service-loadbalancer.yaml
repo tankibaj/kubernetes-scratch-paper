@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moving-sole-deployment
+  labels:
+    app: moving-sole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moving-sole
+  template:
+    metadata:
+      labels:
+        app: moving-sole
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moving-sole-service
+spec:
+  selector:
+    app: moving-sole
+  ports:
+    - protocol: TCP
+      port: 80
+  type: LoadBalancer
