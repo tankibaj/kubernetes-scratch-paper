@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: magnetic-bluejay-deployment
+  name: handy-goshawk-deployment
   labels:
-    app: magnetic-bluejay
+    app: handy-goshawk
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: magnetic-bluejay
+      app: handy-goshawk
   template:
     metadata:
       labels:
-        app: magnetic-bluejay
+        app: handy-goshawk
     spec:
       containers:
       - name: nginx
@@ -25,11 +25,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: magnetic-bluejay-service
+  name: handy-goshawk-service
 spec:
   selector:
-    app: magnetic-bluejay
+    app: handy-goshawk
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      nodePort: 32321
+  type: NodePort
