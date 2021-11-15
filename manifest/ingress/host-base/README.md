@@ -10,6 +10,8 @@
 
     ```bash
     curl -H "Host: ingress.lan" http://HOST_IP
+    OR
+    curl -H "Host: ingress.lan" http://INGRESS_SERVICE_EXTERNAL_IP
     ```
 
 - Clean up
