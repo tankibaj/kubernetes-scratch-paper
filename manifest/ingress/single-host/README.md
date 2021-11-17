@@ -3,7 +3,7 @@
 - Apply manifest
 
     ```bash
-    kubectl apply -f ingress-hostbase.yaml
+    kubectl apply -f ingress-single-host.yaml
     ```
 
 - Test ingress
@@ -17,5 +17,5 @@
 - Clean up
 
     ```bash
-    kubectl delete -f ingress-hostbase.yaml
+    kubectl delete -f ingress-single-host.yaml
     ```
