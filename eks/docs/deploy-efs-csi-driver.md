@@ -163,8 +163,6 @@ efs-csi-node-7lq7s                    3/3     Running   0          4m56s
 
 ## Dynamic Provisioning
 
-[storageclass-pvc-pod.yaml](Deploy%20EFS%205afac/storageclass-pvc-pod.yaml)
-
 **Prerequisite:** You must use version 1.2x or later of the Amazon EFS CSI driver, which requires a 1.17 or later cluster. To update your cluster, see [Updating a cluster](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html).
 
 Create a `StorageClass` for Amazon EFS file systems. For all parameters and configuration options, see [Amazon EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver) on GitHub.
@@ -346,8 +344,6 @@ gp2             kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   f
 <br/>
 
 ## Static Provisioning
-
-[example-app.yml](Deploy%20EFS%205afac/example-app.yml)
 
 This example shows how to make a static provisioned EFS persistent volume (PV) mounted inside container. Edit Persistent Volume code block
 
