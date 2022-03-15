@@ -10,15 +10,14 @@ AWS Load Balancer Controller is a controller to help manage Elastic Load Balance
 Table of Contents
 =================
 
-
-* [Set Environment Variables](#set-environment-variables)
-* [Verify Amazon EFS file system](#verify-amazon-efs-file-system)
-* [IRSA (IAM roles for service account)](#irsa-iam-roles-for-service-account)
-* [Deploy Amazon EFS driver](#deploy-amazon-efs-driver)
-* [Dynamic Provisioning](#dynamic-provisioning)
-  * [Test](#test)
-* [Change default Storage Class](#change-default-storage-class)
-* [Static Provisioning](#static-provisioning)
+  * [Set Environment Variables](#set-environment-variables)
+  * [Verify Amazon EFS file system](#verify-amazon-efs-file-system)
+  * [IRSA (IAM roles for service account)](#irsa-iam-roles-for-service-account)
+  * [Deploy Amazon EFS driver](#deploy-amazon-efs-driver)
+  * [Dynamic Provisioning](#dynamic-provisioning)
+    * [Test](#test)
+  * [Change default Storage Class](#change-default-storage-class)
+  * [Static Provisioning](#static-provisioning)
 
 <br/>
 
