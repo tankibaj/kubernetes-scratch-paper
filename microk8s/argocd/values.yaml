@@ -1,0 +1,36 @@
+# global:
+#   image:
+#     repository: camptocamp/argocd
+#     tag: "v2.3.1_c2c.1"
+
+# controller:
+#   resources:
+#     requests:
+#       cpu: 1000m
+#       memory: 512Mi
+
+server:
+  extraArgs:
+    - --insecure
+  ingress:
+    enabled: true
+    annotations:
+#       kubernetes.io/ingress.class: alb
+#       alb.ingress.kubernetes.io/scheme: internet-facing
+#       alb.ingress.kubernetes.io/target-type: ip
+#       alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+#       alb.ingress.kubernetes.io/ssl-redirect: '443'
+#       alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:244411016559:certificate/dc7a0b4e-d01f-48bb-9467-a4f894b85c17
+#       alb.ingress.kubernetes.io/backend-protocol: HTTPS
+#       alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
+    hosts:
+     - argocd.local.naim.run
+  config:
+    url: http://argocd.local.naim.run
+
+notifications:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 999
+
+
