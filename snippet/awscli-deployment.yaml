@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: awscli
+  name: awscli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: awscli
+  template:
+    metadata:
+      labels:
+        app: awscli
+    spec:
+      containers:
+        - image: amazon/aws-cli
+          name: aws
+          command: ["sleep","10000"]
