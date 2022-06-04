@@ -1,5 +1,5 @@
 ```bash
-k apply -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/pod-with-pvc.yaml
+kubectl apply -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/pod-with-pvc.yaml
 ```
 
 ```bash
@@ -7,5 +7,5 @@ kubectl -n test exec test-app -- sh -c "cat -n /data/out.txt"
 ```
 
 ```bash
-k delete -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/pod-with-pvc.yaml
+kubectl delete -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/pod-with-pvc.yaml
 ```
