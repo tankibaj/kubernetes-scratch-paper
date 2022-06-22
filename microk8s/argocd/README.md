@@ -11,7 +11,7 @@ kubectl create namespace ${ARGOCD_NAMESPACE}
 ```
 
 ```bash
-helm upgrade --install argocd argo/argo-cd --version 4.8.3 --namespace ${ARGOCD_NAMESPACE}  --values values.yaml
+helm upgrade --install argocd argo/argo-cd --version 4.9.4 --namespace ${ARGOCD_NAMESPACE}  --values values.yaml
 ```
 
 ```bash
