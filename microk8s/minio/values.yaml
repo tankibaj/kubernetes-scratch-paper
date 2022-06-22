@@ -1,0 +1,53 @@
+#fullnameOverride: ""
+mode: distributed
+rootUser: "admin"
+rootPassword: "admin123"
+
+## Make sure you have 4 or more pod replicas running
+## https://stackoverflow.com/questions/70202286/minio-deployment-in-microk8s-does-not-start-properly
+## https://github.com/minio/minio/issues/6629
+replicas: 4
+
+persistence:
+  enabled: true
+  size: 15Gi
+  
+ingress:
+  enabled: true
+  hosts:
+    - minio.local.naim.run
+
+consoleIngress:
+  enabled: true
+  hosts:
+    - console-minio.local.naim.run
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 192Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi
+    
+## List of users to be created after minio install
+users:
+  ## Username, password and policy to be assigned to the user
+  ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
+  ## Add new policies as explained here https://docs.min.io/docs/minio-multi-user-quickstart-guide.html
+  ## NOTE: this will fail if LDAP is enabled in your MinIO deployment
+  ## make sure to disable this if you are using LDAP.
+  - accessKey: console
+    secretKey: console123
+    policy: consoleAdmin
+
+## List of buckets to be created after minio install
+buckets:
+  - name: bucket1 # Name of the bucket
+    policy: none # Policy to be set on the bucket [none|download|upload|public]
+    purge: false # Purge if bucket exists already
+    versioning: true # set versioning for bucket [true|false]
+  - name: bucket2
+    policy: none
+    purge: false
+    versioning: true
