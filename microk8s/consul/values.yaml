@@ -2,6 +2,16 @@ global:
   name: consul
 server:
   replicas: 1
+
+ui:
+  ingress:
+    enabled: true
+    pathType: Prefix
+    hosts:
+      - host: consul.local.naim.run
+        paths:
+          - /
+
 #  storage: 1Gi
 #  resources:
 #    requests:
