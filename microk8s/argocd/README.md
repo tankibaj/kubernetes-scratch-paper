@@ -1,20 +1,42 @@
-```bash
-helm repo add argo https://argoproj.github.io/argo-helm
-```
+- Add the Helm Repository:
+    ```bash
+      helm repo add argo https://argoproj.github.io/argo-helm
+    ```
+<br/>
 
-```bash
-ARGOCD_NAMESPACE=argocd
-```
+- Verify that you have access to the chart:
+    ```bash
+    helm search repo argo/argo-cd --versions
+    ```
+<br/>
 
-```bash
-kubectl create namespace ${ARGOCD_NAMESPACE}
-```
+- Set the desire chart version
+    ```bash
+    HELM_CHART_VERSION=4.9.4
+    ```
+<br/>
 
-```bash
-helm upgrade --install argocd argo/argo-cd --version 4.9.4 --namespace ${ARGOCD_NAMESPACE}  --values values.yaml
-```
+- Download default values.yaml of chart
+    ```bash
+    helm show values argo/argo-cd --version ${HELM_CHART_VERSION} > values-default-v${HELM_CHART_VERSION}.yaml
+    ```
+<br/>
 
-```bash
-export ARGOCD_ADMIN_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-echo $ARGOCD_ADMIN_PASSWORD
-```
+- Set the desire namespace of helm deployment
+    ```bash
+    HELM_NAMESPACE=argocd
+    ```
+<br/>
+
+- Deploy the helm chart
+    ```bash
+    helm upgrade --install argocd argo/argo-cd --version ${HELM_CHART_VERSION} --create-namespace --namespace ${HELM_NAMESPACE} --values values.yaml
+    ```
+
+<br/>
+
+- Uninstall
+    ```bash
+    helm uninstall argocd
+    kubectl delete ns argocd --force
+    ```

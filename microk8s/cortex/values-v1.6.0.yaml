@@ -1,0 +1,166 @@
+config:
+  api:
+    prometheus_http_prefix: /prometheus
+  auth_enabled: false
+  ingester:
+    lifecycler:
+      ring:
+        kvstore:
+          store: consul
+          consul:
+            host: 'consul-server.consul.svc:8500'
+  storage:
+    engine: blocks
+  # https://cortexmetrics.io/docs/configuration/configuration-file/#blocks_storage_config
+  blocks_storage:
+    backend: s3
+    s3:
+      bucket_name: cortex-metrics
+      region: eu-central-1
+      endpoint: s3.eu-central-1.amazonaws.com
+      access_key_id: <Replace it>
+      secret_access_key: <Replace it>
+      insecure: true
+    tsdb:
+      dir: /data/tsdb
+    bucket_store:
+      sync_dir: /data/tsdb-sync
+      bucket_index:
+        enabled: true
+#  querier:
+#    # Used when the blocks sharding is disabled.
+#    store_gateway_addresses: "cortex-store-gateway-headless:9095"
+#  # https://cortexmetrics.io/docs/configuration/configuration-file/#query_frontend_config
+#  frontend:
+
+memcached:
+  enabled: true
+memcached-index-read:
+  enabled: true
+memcached-index-write:
+  enabled: true
+memcached-frontend:
+  enabled: true
+
+
+#
+#
+#
+#
+#
+##nginx:
+##  enabled: false
+##
+##
+#
+#tags:
+#  # block storage memcached caching
+#  blocks-storage-memcached: true
+#
+##ingress:
+##  enabled: true
+##  hosts:
+##    - host: cortex.local.naim.run
+##      paths:
+##        - /
+#
+#
+#config:
+#  auth_enabled: false
+#  api:
+#    prometheus_http_prefix: '/prometheus'
+#  ingester:
+#    lifecycler:
+#      ring:
+#        kvstore:
+#          store: consul
+#          consul:
+#            host: 'consul-server.consul.svc:8500'
+#  storage:
+#    engine: blocks
+#  # https://cortexmetrics.io/docs/configuration/configuration-file/#blocks_storage_config
+#  blocks_storage:
+#    backend: s3
+#    s3:
+#      bucket_name: mc-grafana-lab
+#      region: eu-central-1
+#      endpoint: s3.eu-central-1.amazonaws.com
+#      access_key_id: AKIA4SB2R6I5ZRR7FYOE
+#      secret_access_key: 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
+#      insecure: true
+#    tsdb:
+#      dir: /data/tsdb
+#    bucket_store:
+#      sync_dir: /data/tsdb-sync
+#      bucket_index:
+#        enabled: true
+#  store_gateway:
+#    sharding_enabled: false
+##    sharding_ring:
+##      # Provide the correct Consul DNS endpoint for Store Gateway ring
+##      kvstore:
+##        store: consul
+##        prefix: 'collectors/'
+##        consul:
+##          host: 'consul-server.consul.svc:8500'
+##          http_client_timeout: '20s'
+##          consistent_reads: true
+#  distributor:
+#    ha_tracker:
+#      enable_ha_tracker: true
+#      kvstore:
+#        store: consul
+#        consul:
+#          host: consul-server.consul.svc:8500
+#      shard_by_all_labels: true
+#      pool:
+#        health_check_ingesters: true
+#  querier:
+#    # https://cortexmetrics.io/docs/blocks-storage/production-tips/
+#    query_ingesters_within: 12h5m
+#    query_store_after: 12h
+#  alertmanager:
+#    enable_api: true
+#
+#
+#ingester:
+#  enabled: true
+#  replicas: 1
+#
+#  # Ingesters are deployed as Statefulset with Persistent Volumes to keep the data if there are any Pod restarts
+#  statefulSet:
+#    enabled: true
+#
+##  resources:
+##    limits:
+##      memory: 320Mi
+##      cpu: 1
+##    requests:
+##      memory: 256Mi
+##      cpu: 250m
+#
+#  persistentVolume:
+#    enabled: true
+#    size: 5Gi
+#
+#  autoscaling:
+#    enabled: true
+#    minReplicas: 3
+#    maxReplicas: 10
+#    targetMemoryUtilizationPercentage: 70
+#
+#
+##memcached:
+##  enabled: true
+#
+#
+##memcached-index-read:
+##  enabled: true
+#
+#
+##memcached-index-write:
+##  enabled: true
+#
+#
+#memcached-frontend:
+#  enabled: true
