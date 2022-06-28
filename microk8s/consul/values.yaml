@@ -1,7 +1,16 @@
 global:
   name: consul
 server:
-  replicas: 1
+  replicas: 3
+  storage: 1Gi # 5Gi
+#  storageClass: microk8s-hostpath
+  resources:
+    requests:
+      memory: 128Mi #256Mi
+      cpu: 100m #200m
+    limits:
+      memory: 256Mi #512Mi
+      cpu: 200m #500m
 
 ui:
   ingress:
@@ -11,12 +20,3 @@ ui:
       - host: consul.local.naim.run
         paths:
           - /
-
-#  storage: 1Gi
-#  resources:
-#    requests:
-#      memory: 128Mi
-#      cpu: 100m
-#    limits:
-#      memory: 192Mi
-#      cpu: 150m
