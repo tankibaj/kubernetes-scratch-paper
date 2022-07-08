@@ -1,11 +1,6 @@
 # crash-loop
 Simple alpine-based container that sleeps for 5 seconds and then exits. The purpose is to produce a CrashLoopBackOff scenario for the Prometheus alert.
 
-## Build docker image
-
-```bash
-docker build -t thenaim/crashloopbackoff .
-```
 
 ## Kubernetes deployment
 
@@ -14,21 +9,21 @@ cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crashloopbackoff-deployment
+  name: crashme-deployment
   labels:
-    app: crashloopbackoff
+    app: crashme
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: crashloopbackoff
+      app: crashme
   template:
     metadata:
       labels:
-        app: crashloopbackoff
+        app: crashme
     spec:
       containers:
-      - name: crashloop
+      - name: crashme
         image: thenaim/crashloopbackoff:latest
 EOF
 ```
