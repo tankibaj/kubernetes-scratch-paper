@@ -12,7 +12,7 @@
 
 - Set the desire chart version
     ```bash
-    HELM_CHART_VERSION=4.9.4
+    HELM_CHART_VERSION=5.4.0
     ```
 <br/>
 

@@ -10,23 +10,27 @@
 #       memory: 512Mi
 
 server:
-  extraArgs:
-    - --insecure
+#  extraArgs:
+#    - --insecure
   ingress:
     enabled: true
     annotations:
 #       kubernetes.io/ingress.class: alb
+#       alb.ingress.kubernetes.io/load-balancer-name: argocd-ingress
 #       alb.ingress.kubernetes.io/scheme: internet-facing
 #       alb.ingress.kubernetes.io/target-type: ip
 #       alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
 #       alb.ingress.kubernetes.io/ssl-redirect: '443'
-#       alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:244411016559:certificate/dc7a0b4e-d01f-48bb-9467-a4f894b85c17
+#       alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:XXXXXXXXXXX:certificate/XXXXXXXXXXXX
 #       alb.ingress.kubernetes.io/backend-protocol: HTTPS
 #       alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
     hosts:
      - argocd.local.naim.run
   config:
     url: http://argocd.local.naim.run
+    # -- exec.enabled indicates whether the UI exec feature is enabled. It is disabled by default.
+    # -- Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/rbac/#exec-resource
+    exec.enabled: "true"
 
 notifications:
   securityContext:
