@@ -1,5 +1,5 @@
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/statefulset-with-pvc.yaml
+kubectl apply -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/statefulset-with-pvc/statefulset-with-pvc.yaml
 ```
 
 ```bash
