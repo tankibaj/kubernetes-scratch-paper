@@ -1,5 +1,5 @@
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/snippet/awscli-deployment/awscli-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/tankibaj/kubernetes-scratch-paper/main/manifest/awscli-deployment/awscli-deployment.yaml
 ```
 
 ```bash

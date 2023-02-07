@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dynamic-webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dynamic-webserver # -- has to match .spec.template.metadata.labels
+  serviceName: "dynamic-webserver" # -- serviceName is the name of the (headless) service that governs this StatefulSet. This service must exist before the StatefulSet, and is responsible for the network identity of the set
+  template:
+    metadata:
+      labels:
+        app: dynamic-webserver # -- has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: date-writer
+        image: alpine
+        command: [ "/bin/sh" ]
+        args: [ "-c", "while true; do date >> /html/index.html; sleep 5; done" ]
+        volumeMounts:
+        - name: html # -- has to match .spec.volumeClaimTemplates.metadata
+          mountPath: /html
+      - name: webserver
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http-web-svc
+        volumeMounts:
+        - name: html # -- has to match .spec.volumeClaimTemplates.metadata
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: html
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: nfs # -- efs/nfs dynamic provisioner storageClass
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dynamic-webserver
+spec:
+  selector:
+    app: dynamic-webserver # -- has to match with StatefulSet/Deployment .spec.template.metadata.labels
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http-web-svc # -- has to match with StatefulSet/Deployment .spec.template.spec.containers[0].ports[0].name
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dynamic-webserver
+spec:
+  ingressClassName: nginx-public
+  rules:
+  - host: "dynamic-webserver.local.naim.run"
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: dynamic-webserver
+            port:
+              number: 80
